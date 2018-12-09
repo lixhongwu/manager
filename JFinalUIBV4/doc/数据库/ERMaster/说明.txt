@@ -1,5 +1,0 @@
-
-丢进eclipse的plugins目录
-
-
-
