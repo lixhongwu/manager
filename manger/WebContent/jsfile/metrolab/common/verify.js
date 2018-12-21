@@ -201,6 +201,14 @@ var platform_verify = function() {
 	    	return {"result" : true, "message" : ""};
 	    }
 	};
+	var money =  function(str){
+		var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+	    if(!reg.test(str)){
+	    	return {"result" : false, "message" : i18n_utils_msg_format};
+	    }else{
+	    	return {"result" : true, "message" : ""};
+	    }
+	};
 	
 	/**
 	 * 	IP 地址
@@ -367,6 +375,9 @@ var platform_verify = function() {
 			if(value.length != 0){
 				if(vType == "email"){//邮箱
 					resultArr = email(value);
+					
+				}else if(vType == "money"){//金额
+					resultArr = money(value);
 					
 				}else if(vType == "number"){//整数
 					resultArr = number(value);

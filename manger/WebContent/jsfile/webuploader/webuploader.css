@@ -25,4 +25,9 @@
 	opacity: 0.6;
 	pointer-events:none;
 }
+.file-item {
+	float:left;
+	position:relative;
+	border:0px;
+}
 

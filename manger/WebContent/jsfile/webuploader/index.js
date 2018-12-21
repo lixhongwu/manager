@@ -114,8 +114,8 @@ jQuery(function() {
         ratio = window.devicePixelRatio || 1,
 
         // 缩略图大小
-        thumbnailWidth = 100 * ratio,
-        thumbnailHeight = 100 * ratio,
+        thumbnailWidth = 144 * ratio,
+        thumbnailHeight = 108 * ratio,
 
         // Web Uploader实例
         uploader;
@@ -143,17 +143,25 @@ jQuery(function() {
             mimeTypes: 'image/*'
         }
     });
-
+   
     // 当有文件添加进来的时候
     uploader.on( 'fileQueued', function( file ) {
 	  	console.log("文件大小(MB):" + file.size/(1024 * 1024));
   		if(file.size > (2 * 1024 * 1024)){ //大于2MB直接结束
   			return false;
   		}
+		var a ='<a href="javascript:void(0);" onclick="delimg(this)" style="float:right;position: absolute;top: 0;right: 0px;background: #ffffff;border-radius: 0px;line-height: 20px;width: 20px;border-radius: 10px;text-align: center;">X</a>';
+		
         var $li = $(
+        		
                 '<div id="' + file.id + '" class="file-item thumbnail">' +
-                    '<img>' +
-                    '<div class="info">' + file.name + '</div>' +
+                a +
+                '<img class="headerImg" style="max-width:144px;max-height:108px;width:144px;height:108px	" >'+
+                    //'<img>' +
+                    '<div class="info" style="width:144px">'+
+                    '<input type="hidden" class="fileids"  style="width:62px" name="fileids" value="" />'+
+                    '<label >排序：</label>'+
+                    '<input type="text" style="width:83px" name="fileindex" value="0" /></div>' +
                 '</div>'
                 ),
             $img = $li.find('img');
@@ -188,8 +196,11 @@ jQuery(function() {
 
     // 文件上传成功，给item添加成功class, 用样式标记上传成功。
     uploader.on( 'uploadSuccess', function( file, response ) {
-    	alert(file.name + "---" + JSON.stringify(response));
         $( '#'+file.id ).addClass('upload-state-done');
+        //$( '#'+file.id ).attr('ids', response[0].ids);
+        var $input = $('#'+file.id ).find('input[class="fileids"]');
+        $input.val(response[0].ids);
+        $( '#isupdateImge').val("true");
     });
 
     // 文件上传失败，现实上传出错。

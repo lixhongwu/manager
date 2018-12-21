@@ -9,6 +9,8 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.upload.UploadFile;
 import com.platform.mvc.base.BaseValidator;
+import com.platform.mvc.dept.Department;
+import com.platform.mvc.station.Station;
 import com.platform.mvc.upload.UploadService;
 import com.platform.tools.ToolDateTime;
 import com.platform.tools.ToolRandoms;
@@ -94,11 +96,15 @@ public class UserValidator extends BaseValidator {
 		if (actionKey.equals("/platform/user/save")){
 			controller.keepModel(User.class);
 			controller.keepModel(UserInfo.class);
+			controller.setAttr("station", Station.dao.findById(controller.getPara("user.stationids")));
+			controller.setAttr("dept", Department.dao.findById(controller.getPara("user.departmentids")));
 			controller.render("/platform/user/add.html");
 		
 		}else if (actionKey.equals("/platform/user/update")){
 			controller.keepModel(User.class);
 			controller.keepModel(UserInfo.class);
+			controller.setAttr("station", Station.dao.findById(controller.getPara("user.stationids")));
+			controller.setAttr("dept", Department.dao.findById(controller.getPara("user.departmentids")));
 			controller.render("/platform/user/update.html");
 		}
 	}

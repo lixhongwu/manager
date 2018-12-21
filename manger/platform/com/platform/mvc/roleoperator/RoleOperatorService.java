@@ -1,5 +1,6 @@
 package com.platform.mvc.roleoperator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jfinal.log.Log;
@@ -38,15 +39,21 @@ public class RoleOperatorService extends BaseService {
 		String sql = getSqlMy("platform.roleOperator.findByModuleAndRoleIds");
 		
 		List<Record> smList = (List<Record>) splitPage.getList();
+		List<Record> temList=new ArrayList<Record>();
+		//for(int i=0;i<smList.size();i++) {
 		for (Record sm : smList) {
+			//Record sm = smList.get(i);
 			String mids = sm.getStr("mids");
 			List<Record> olist = Db.find(sql, roleIds, mids);
 			if(olist != null && olist.size() != 0){
 				sm.set("list", olist);
-			}else{
-				smList.remove(sm);
+				temList.add(sm);
 			}
+//			else{
+//				smList.remove(sm);
+//			}
 		}
+		splitPage.setList(temList);
 	}
 
 	/**

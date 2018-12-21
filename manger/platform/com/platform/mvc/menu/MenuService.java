@@ -178,15 +178,23 @@ public class MenuService extends BaseService {
 		String operatorSql = getSqlMy("platform.menu.findByModuleAndRoleIds");
 		
 		List<Record> smList = (List<Record>) splitPage.getList();
+		List<Record> temList=new ArrayList<Record>();
+		//for(int i=0;i<smList.size();i++) {
 		for (Record sm : smList) {
+			//Record sm = smList.get(i);
 			String mids = sm.getStr("mids");
 			List<Record> olist = Db.find(operatorSql, menuIds, mids);
 			if(olist != null && olist.size() != 0){
 				sm.set("list", olist);
-			}else{
-				smList.remove(sm);
+				temList.add(sm);
 			}
+//			else{
+//				smList.remove(sm);
+//			}
+
+			
 		}
+		splitPage.setList(temList);
 	}
 
 }

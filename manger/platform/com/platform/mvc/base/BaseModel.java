@@ -352,7 +352,23 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		
 		return super.save();
 	}
-
+	/**
+	 * 重写save方法，自动赋值，生成UUID值
+	 */
+	public boolean saveRandomId() {
+		String[] pkArr = getTable().getPrimaryKey();
+		for (String pk : pkArr) {
+			this.set(pk, ToolRandoms.randomId());
+		}
+		
+		Table table = getTable();
+		
+		if(table.hasColumnLabel(column_version)){ // 是否需要乐观锁控制
+			this.set(column_version, isOracle() ? BigDecimal.valueOf(0) : Long.valueOf(0)); // 初始化乐观锁版本号
+		}
+		
+		return super.save();
+	}
 	/**
 	 * 记录保存操作人和时间
 	 * @param userIds

@@ -98,10 +98,11 @@
 									<td>${escapeHtml(sm.pmname!)}</td>
 									<td>${escapeHtml(sm.mname!)}</td>
 									<td>
-										<% for(o in sm.list){ %>
+										<% if(sm.list!=null){
+										for(o in sm.list){ %>
 											<input type="checkbox" name="${o.ids!}" value="${o.roids!}" onchange='changeFunc(this);' 
 												 ${ isEmpty(o.roids!) ? "" : "checked='checked'" } > ${o.names!} &nbsp;&nbsp;
-										<% } %>
+										<% } }%>
 									</td>
 								</tr>
 								<% } %>

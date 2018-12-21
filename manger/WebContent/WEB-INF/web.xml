@@ -55,6 +55,12 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>JFinal</filter-name>
+		<url-pattern>/fapai/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
 	
 	<error-page>  
 	 	<error-code>404</error-code>  

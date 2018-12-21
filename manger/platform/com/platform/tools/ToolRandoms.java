@@ -1,5 +1,7 @@
 package com.platform.tools;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -72,7 +74,24 @@ public abstract class ToolRandoms {
 		}
 		return uuid;
 	}
+	public static String randomId(){
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddhhmmss");
+        int iRes = 0;
+        String sRes = "";
+        try
+        {
+            iRes = (int) ( ( Math.random() * 9 + 1 ) * 1000 );
+            sRes = format.format(new Date())+String.valueOf( +iRes );
+        }
+        catch ( Exception e )
+        {
 
+        	sRes = format.format(new Date())+ "952746";
+        }
+
+        return sRes;
+    }
+	
 	/**
 	 * 产生两个数之间的随机数
 	 * @param min 小数

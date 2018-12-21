@@ -94,10 +94,11 @@
 									<td>${escapeHtml(sm.sname!)}</td>
 									<td>${escapeHtml(sm.mname!)}</td>
 									<td>
-										<% for(o in sm.list){ %>
+										<% if (sm.list!=null){
+										for(o in sm.list){ %>
 											<input type="radio" name="menuOperator" value="" onchange='changeFunc(this.checked, "${o.ids!}", "${o.mids!}");' 
 												 ${ isEmpty(o.mids!) ? "" : "checked='checked'" } > ${o.names!} &nbsp;&nbsp;
-										<% } %>
+										<% } }%>
 									</td>
 								</tr>
 								<% } %>

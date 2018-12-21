@@ -37,9 +37,8 @@ public class TestGenerateCode extends TestBase {
 	public static String[][] tableArr = {
 		//{"数据源名称", "表名称", "主键列名称", "生成类名称"}
 //		{"ConstantInit.db_dataSource_main", "test_blog", "ids", "Blog"}
-		{null, "test_blog", null, "Blog"}
-
-//		{null, "pt_department", null, "Department"},
+		{null, "fp_order", null, "FpOrder"}
+		
 //		{null, "pt_dict", null, "Dict"},
 //		{null, "pt_group", null, "Group"},
 //		{null, "pt_menu", null, "Menu"},
@@ -71,7 +70,7 @@ public class TestGenerateCode extends TestBase {
 	 * 生成的文件存放的包，公共基础包
 	 * 描述：比如platform所在的包就是com.platform，test所在的包就是com.test
 	 */
-	public static final String packageBase = "com.test2.mvc";
+	public static final String packageBase = "com.fapai.mvc";
 
 	/**
 	 * controller基础路径，例如
@@ -82,7 +81,7 @@ public class TestGenerateCode extends TestBase {
 	 * /platform/user/add.jsp 中的 platform
 	 * /test/blog/list.jsp 中的 test
 	 */
-	public static final String basePath = "test";
+	public static final String basePath = "fapai";
 
 	/**
 	 * 表所在的数据源名称
@@ -159,11 +158,11 @@ public class TestGenerateCode extends TestBase {
 			//handler.dto(className, classNameSmall, dataSource, tableName, colunmList); 
 			
 			// 7.生成视图文件
-			//handler.list(classNameSmall, colunmList);
-			//handler.add(classNameSmall, colunmList);
-			//handler.update(classNameSmall, colunmList);
-			//handler.form(classNameSmall, colunmList);
-			//handler.view(classNameSmall, colunmList);
+			handler.list(classNameSmall, colunmList);
+//			handler.add(classNameSmall, colunmList);
+//			handler.update(classNameSmall, colunmList);
+//			handler.form(classNameSmall, colunmList);
+			handler.view(classNameSmall, colunmList);
 		}
 		
 		System.exit(0);

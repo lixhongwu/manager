@@ -42,6 +42,10 @@
 	    <div id="fileList" class="uploader-list"></div>
 	    <div id="filePicker">选择图片</div>
 	</div>
+	<div style="position: relative;width: 135px;float: left;">
+					<a href="javascript:void(0);" onclick="delimg(this" style="float:right;position: absolute;top: 0;right: 20px;background: #ffffff;border-radius: 0px;line-height: 20px;width: 20px;border-radius: 10px;text-align: center;">X</a>
+					<img class="headerImg" style="max-width:135px;max-height:75px;width:135;height:75" >
+				</div>
 	
 	<script type="text/javascript" charset="utf-8" src="<%=path%>/jsfile/webuploader/index.js"></script>
 
