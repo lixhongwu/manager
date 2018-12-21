@@ -81,7 +81,7 @@ function delimg(obj,fileId) {
 									    <% if(!isEmpty(fileList)){ for(file in fileList){ %>
 									    <div id="WU_FILE"   class="file-item thumbnail upload-state-done">
 									    <a href="javascript:void(0);" onclick="delimg(this)" style="float:right;position: absolute;top: 0;right: 2px;background: #ffffff;border-radius: 0px;line-height: 20px;width: 20px;border-radius: 10px;text-align: center;">X</a>
-									    <img class="headerImg" style="max-width:144px;max-height:108px;width:144px;height:108px" src="${cxt!}/${file.pic_url!}">
+									    <img class="headerImg" style="max-width:144px;max-height:108px;width:144px;height:108px" src="${piccontext!}/${file.pic_url!}">
 									    <div class="info" style="width:144px">
 									    <input type="hidden" class="fileids"  style="width:62px" name="fileids" value="${file.fileid!}" />
 									    <label >排序：</label>

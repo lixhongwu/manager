@@ -36,6 +36,10 @@ public class UploadController extends BaseController {
 	 */
 	public static final String path_webInf = "WEB-INF" + File.separator + "files" + File.separator + "upload";
 	
+	//静态文件的根目录
+	public static String BASE_UPlOAD_PATH=PropKit.get("config.uploadpath");
+	public static String PICCONTEXT=PropKit.get("config.piccontext");
+	
 	/**
 	 * 分片上传临时目录
 	 */
@@ -44,7 +48,7 @@ public class UploadController extends BaseController {
 	/**
 	 * 文件存放路径，使用get方式提交，此参数放在URL中，否则在getFile之前无法获取
 	 */
-	private String pathType;
+	public static String pathType=PropKit.get("config.pathType");;
 	
 	private UploadService uploadService;
 	
@@ -55,17 +59,20 @@ public class UploadController extends BaseController {
 	@Before(NotAction.class)
 	public String path(){
 		if(null != pathType && pathType.equals("webInf")){
-			return path_webInf;
+			return  File.separator+path_webInf;
+		} else if(null != pathType && pathType.equals("path")){
+			return BASE_UPlOAD_PATH+File.separator+path_root;
 		} else {
 			pathType = "webRoot";
 			return path_root;
-		}
+		} 
 	}
 	
 	/**
 	 * 所有文件一次上传
 	 */
 	public void index() {
+		pathType = "path";
 		String path = path();
 		List<UploadFile> files = getFiles(path, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);
 		List<Map<String, String>> list = uploadService.upload(pathType, files);

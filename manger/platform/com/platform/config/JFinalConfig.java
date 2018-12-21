@@ -85,7 +85,14 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		//constants.setLogFactory(new LogBackFactory()); // 参考Log4jLogFactory、Log4jLog实现LogBackFactory、LogBackLog
 
 		if(log.isInfoEnabled()) log.info("configConstant 设置path相关");
-		constants.setBaseUploadPath(PathKit.getWebRootPath()); // 上传公共路径 + File.separator + "files"
+		String pathType=PropKit.get("config.pathType");;
+		if("path".equals(pathType)) {
+			constants.setBaseUploadPath("/");
+		}else {
+			constants.setBaseUploadPath(PathKit.getWebRootPath()); // 上传公共路径 + File.separator + "files"
+		}
+		
+		
 		constants.setBaseDownloadPath(PathKit.getWebRootPath()); // 下载公共路径 + File.separator + "files"
 		
 		if(log.isInfoEnabled()) log.info("configConstant 视图Beetl设置");

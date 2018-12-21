@@ -4,6 +4,8 @@ import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
+import com.platform.mvc.upload.UploadController;
+import com.platform.tools.ToolWeb;
 import com.jfinal.log.Log;
 
 import java.io.File;
@@ -65,7 +67,11 @@ public class FphouseController extends BaseController {
 		// Fphouse.dao.find(sql)
 		setAttr("fphouse", fphouse);
 		setAttr("fileList", picList);
-
+		if("path".equals(UploadController.pathType)) {
+			setAttr("piccontext", UploadController.PICCONTEXT);
+		}else {
+			setAttr("piccontext", ToolWeb.getContextPath(getRequest()));
+		}
 		render("/fapai/fphouse/update.html");
 	}
 	
@@ -96,6 +102,11 @@ public class FphouseController extends BaseController {
 		// Fphouse.dao.find(sql)
 		setAttr("fphouse", fphouse);
 		setAttr("fileList", picList);
+		if("path".equals(UploadController.pathType)) {
+			setAttr("piccontext", UploadController.PICCONTEXT);
+		}else {
+			setAttr("piccontext", ToolWeb.getContextPath(getRequest()));
+		}
 		render("/fapai/fphouse/view.html");
 	}
 	

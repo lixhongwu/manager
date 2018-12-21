@@ -72,11 +72,16 @@ public class UploadService extends BaseService {
 					.append(PathKit.getWebRootPath()).append(File.separator)
 					.append(UploadController.path_webInf).append(File.separator)
 					.toString();
-		} else {
+		} else if(pathType.equals("path")){
 			basePath = new StringBuffer()
-					.append(PathKit.getWebRootPath()).append(File.separator)
+					.append(UploadController.BASE_UPlOAD_PATH).append(File.separator)
 					.append(UploadController.path_root).append(File.separator)
 					.toString();
+		}else {
+				basePath = new StringBuffer()
+						.append(PathKit.getWebRootPath()).append(File.separator)
+						.append(UploadController.path_root).append(File.separator)
+						.toString();
 		}
 		
         String md5 = ToolMD5.encodeMD5HexFile(basePath + fileName); // 文件MD5摘要
