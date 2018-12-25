@@ -20,7 +20,7 @@ function delimg(obj,fileId) {
 							<label class="control-label">标题:</label>
 							<div class="controls">
 								<input type="hidden" name="fpcar.is_delete" value="${fpcar.is_delete!}"/>
-								<input type="text" name="fpcar.car_title" class="span9"  value="${fpcar.car_title!}" maxlength="20" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="2-20位任意字符">
+								<input type="text" name="fpcar.car_title" class="span9"  value="${fpcar.car_title!}" maxlength="100" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="2-100位任意字符">
 							<span class="help-inline"> </span>
 							</div>
 						</div>
@@ -31,7 +31,7 @@ function delimg(obj,fileId) {
 								<select name="fpcar.car_nature" class="span2" class="combox" >
 									<option value=1 ${fpcar.car_nature! == 1 ? "selected='selected'":"" }>非运营</option>
 									<option value=2 ${fpcar.car_nature! == 2 ? "selected='selected'":"" }>运营</option>
-									<option value=0 ${fpcar.car_nature! == 0 ? "selected='selected'":"" }>其他</option>
+									<option value=3 ${fpcar.car_nature! == 3 ? "selected='selected'":"" }>其他</option>
 								</select>	
 							</div>
 						</div>
@@ -47,7 +47,7 @@ function delimg(obj,fileId) {
 						<div class="control-group">
 							<label class="control-label">当前价:</label>
 							<div class="controls">
-								<input type="text" class="span3" name="fpcar.current_price" value="${fpcar.current_price!}" maxlength="20" vMin="1" vType="money" onblur="platform_verify.onblurVali(this);" placeholder="金额(两位小数)">
+								<input type="text" class="span3" name="fpcar.current_price" value="${fpcar.current_price!}" maxlength="20" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);" placeholder="金额(整数)">
 								<span class="help-inline"></span>
 								<span class="help-inline">元</span>
 							</div>
@@ -55,7 +55,7 @@ function delimg(obj,fileId) {
 						<div class="control-group">
 							<label class="control-label">法院评估价:</label>
 							<div class="controls">
-								<input type="text" class="span3" name="fpcar.court_price" value="${fpcar.court_price!}" maxlength="20" vMin="1" vType="money" onblur="platform_verify.onblurVali(this);" placeholder="金额(两位小数)">
+								<input type="text" class="span3" name="fpcar.court_price" value="${fpcar.court_price!}" maxlength="20" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);" placeholder="金额(整数)">
 								<span class="help-inline"></span>
 								<span class="help-inline">元</span>
 							</div>
@@ -64,7 +64,7 @@ function delimg(obj,fileId) {
 						<div class="control-group">
 							<label class="control-label">市场评估价:</label>
 							<div class="controls">
-								<input type="text" class="span3" name="fpcar.market_price" value="${fpcar.market_price!}" maxlength="20" vMin="1" vType="money" onblur="platform_verify.onblurVali(this);" placeholder="金额(两位小数)">
+								<input type="text" class="span3" name="fpcar.market_price" value="${fpcar.market_price!}" maxlength="20" vMin="1" vType="numberZ" onblur="platform_verify.onblurVali(this);" placeholder="金额(整数)">
 								<span class="help-inline"></span>
 								<span class="help-inline">元</span>
 							</div>
@@ -115,7 +115,7 @@ function delimg(obj,fileId) {
 						<div class="control-group">
 							<label class="control-label">拍卖开始时间</label>
 							<div class="controls">
-								<input type="text" class="span5" name="fpcar.auction_start_time" readonly="readonly"  value='${fpcar.auction_start_time!, dateFormat="yyyy-MM-dd HH:mm:ss"}' 
+								<input type="text" class="span5" name="fpcar.auction_start_time" id="auction_start_time" readonly="readonly" maxlength="20" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="必选" value='${fpcar.auction_start_time!, dateFormat="yyyy-MM-dd HH:mm:ss"}' 
 								onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate:'1900-01-01'})">
 								<span class="help-inline"> </span>
 							</div>
@@ -124,7 +124,7 @@ function delimg(obj,fileId) {
 						<div class="control-group">
 							<label class="control-label">拍卖结束时间</label>
 							<div class="controls">
-								<input type="text" class="span5" name="fpcar.auction_end_time" readonly="readonly" value='${fpcar.auction_end_time!, dateFormat="yyyy-MM-dd HH:mm:ss"}' 
+								<input type="text" class="span5" name="fpcar.auction_end_time" id="auction_end_time" readonly="readonly" maxlength="20" vMin="1" vType="length"  onblur="platform_verify.onblurVali(this);" placeholder="必选" value='${fpcar.auction_end_time!, dateFormat="yyyy-MM-dd HH:mm:ss"}' 
 								onClick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss', minDate:'1900-01-01'})">
 								<span class="help-inline"> </span>
 							</div>
@@ -132,7 +132,7 @@ function delimg(obj,fileId) {
 						<div class="control-group">
 							<label class="control-label">车辆初次登记日期</label>
 							<div class="controls">
-								<input type="text" class="span5" name="fpcar.car_first_reg_time" readonly="readonly" value='${fpcar.car_first_reg_time!, dateFormat="yyyy-MM-dd "}' 
+								<input type="text" class="span5" name="fpcar.car_first_reg_time" id="car_first_reg_time" readonly="readonly" maxlength="20" vMin="1" vType="length"  onblur="platform_verify.onblurVali(this);" placeholder="必选" value='${fpcar.car_first_reg_time!, dateFormat="yyyy-MM-dd "}' 
 								onClick="WdatePicker({dateFmt: 'yyyy-MM-dd ', minDate:'1900-01-01'})">
 								<span class="help-inline"> </span>
 							</div>
@@ -181,7 +181,7 @@ function delimg(obj,fileId) {
 							<label class="control-label">违章记录:</label>
 							<div class="controls">
 			
-								<input type="text" name="fpcar.violation_records" class="span3"  value="${fpcar.violation_records!}" maxlength="20" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="">
+								<input type="text" name="fpcar.violation_records" class="span3"  value="${fpcar.violation_records!}" maxlength="50" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="">
 							<span class="help-inline"> </span>
 							</div>
 						</div>
@@ -189,7 +189,7 @@ function delimg(obj,fileId) {
 							<label class="control-label">详细介绍:</label>
 							<div class="controls">
 			
-								<input type="text" name="fpcar.detail_desc" class="span3"  value="${fpcar.detail_desc!}" maxlength="20" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="">
+								<input type="text" name="fpcar.detail_desc" class="span3"  value="${fpcar.detail_desc!}" maxlength="200" vMin="0" vType="length" onblur="platform_verify.onblurVali(this);" placeholder="">
 							<span class="help-inline"> </span>
 							</div>
 						</div>
@@ -197,18 +197,18 @@ function delimg(obj,fileId) {
 							<label class="control-label">鉴定报告价格:</label>
 							<div class="controls">
 			
-								<input type="text" name="fpcar.appraisal_report_price" class="span3"  value="${fpcar.appraisal_report_price!}" maxlength="20" vMin="0" vType="money" onblur="platform_verify.onblurVali(this);" placeholder="">
+								<input type="text" name="fpcar.appraisal_report_price" class="span3"  value="${fpcar.appraisal_report_price!}" maxlength="20" vMin="0" vType="numberZ" onblur="platform_verify.onblurVali(this);" placeholder="">
 							<span class="help-inline"> </span>
 							</div>
 						</div>
-						<div class="control-group">
+						<!-- <div class="control-group">
 							<label class="control-label">税费:</label>
 							<div class="controls">
 			
 								<input type="text" name="fpcar.tax" class="span3"  value="${fpcar.tax!}" maxlength="20" vMin="0" vType="money" onblur="platform_verify.onblurVali(this);" placeholder="">
 							<span class="help-inline"> </span>
 							</div>
-						</div>
+						</div> -->
 						<div class="control-group">
 							<label class="control-label">法院公告链接</label>
 							<div class="controls">
@@ -245,7 +245,10 @@ function delimg(obj,fileId) {
 				 common_modals.alert("请上传商品图片!！");
 				 return false;
 			 }
-			
+			 if($("#fileList").find(".error").size()>0){
+				 common_modals.alert("有图片上传失败，请删除重试！");
+				 return false;
+			 }
 			if(isAdd){ // 添加
 				
 				

@@ -29,16 +29,18 @@ public class FpcarService extends BaseService {
 		for (int i = 0; i < fileids.length; i++) {
 			String fileid=fileids[i];
 			Upload upload = Upload.dao.findById(fileid);
-			PicUpCar pic=new PicUpCar();
-			pic.set("id_car", fpcar.getIds());
-			pic.set("pic_type", 0);
-			pic.set("pic_order", fileindex[i]);
-			pic.set("pic_url", UploadController.path_root+File.separator+upload.get("filename"));
-			pic.set("is_delete", 0);
-			pic.setFileid(fileid);
-			Date date=new Date();
-			pic.setModify_time(new Timestamp(date.getTime()));
-			pic.saveRandomId();
+			if(upload!=null) {
+				PicUpCar pic=new PicUpCar();
+				pic.set("id_car", fpcar.getIds());
+				pic.set("pic_type", 0);
+				pic.set("pic_order", fileindex[i]);
+				pic.set("pic_url", UploadController.path_root+File.separator+upload.get("filename"));
+				pic.set("is_delete", 0);
+				pic.setFileid(fileid);
+				Date date=new Date();
+				pic.setModify_time(new Timestamp(date.getTime()));
+				pic.saveRandomId();
+			}
 		}
 		
 	}
@@ -57,6 +59,21 @@ public class FpcarService extends BaseService {
 //		for (PicUpcar picUpcar : list) {
 //			picUpcar.delete();
 //		}
+	}
+
+	public boolean shelves(String ids, String type) {
+		Fpcar fpcar = Fpcar.dao.findById(ids);
+		if(fpcar!=null) {
+			if("0".equals(type)) {
+				fpcar.setShelves_status(0);
+			}else if("1".equals(type)){
+				fpcar.setShelves_status(1);
+			}
+			return fpcar.update();
+		}else {
+			return false;
+		}
+		
 	}
 	
 }

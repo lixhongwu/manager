@@ -63,7 +63,7 @@ function delimg(obj,fileId) {
 									<option value=1 ${fphouse.house_nature! == 1 ? "selected='selected'":"" }>住宅</option>
 									<option value=2 ${fphouse.house_nature! == 2 ? "selected='selected'":"" }>商业</option>
 									<option value=3 ${fphouse.house_nature! == 3 ? "selected='selected'":"" }>工业</option>
-									<option value=0 ${fphouse.house_nature! == 0 ? "selected='selected'":"" }>其他</option>
+									<option value=4 ${fphouse.house_nature! == 4 ? "selected='selected'":"" }>其他</option>
 								</select>	
 							</div>
 						</div>
@@ -96,7 +96,7 @@ function delimg(obj,fileId) {
 						<div class="control-group">
 							<label class="control-label">市场评估价:</label>
 							<div class="controls">
-								<input type="text" class="span3" name="martket_price" value="${fphouse.martket_price!}" maxlength="20" vMin="1" vType="money" onblur="platform_verify.onblurVali(this);" placeholder="金额(两位小数)">
+								<input type="text" class="span3" name="fphouse.market_price" value="${fphouse.market_price!}" maxlength="20" vMin="1" vType="money" onblur="platform_verify.onblurVali(this);" placeholder="金额(两位小数)">
 								<span class="help-inline"></span>
 								<span class="help-inline">元</span>
 							</div>

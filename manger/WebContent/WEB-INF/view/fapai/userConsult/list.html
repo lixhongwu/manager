@@ -1,5 +1,5 @@
 
-<form id="splitPage" action="/fapai/userConsult" method="POST" class="form-horizontal">
+<form id="splitPage" action="${cxt!}/fapai/userConsult" method="POST" class="form-horizontal">
 
 	<!-- BEGIN PAGE CONTAINER-->
 	<div class="container-fluid">
@@ -69,17 +69,21 @@
 										微信昵称
 									</th>
 									<th class="hidden-phone" >
-										微信openid
+										性别
+									</th>
+									<th class="hidden-phone" >
+										手机号
 									</th>
 									<th class="hidden-phone" >
 										咨询类型
 									</th>
 									<th class="hidden-phone" >
-										咨询产品id
-									</th>
-									<th class="hidden-phone" >
 										预约时间	
 									</th>
+									<th class="hidden-phone" >
+										咨询产品id
+									</th>
+									
 									<!-- <th class="hidden-phone">${i18nMap["admin.common.operation"]}</th> -->
 								</tr>
 							</thead>
@@ -93,7 +97,18 @@
 										<span >${escapeHtml(model["wx_nick"]!)}</span>
 									</td>
 									<td class="hidden-phone">
-										<span >${escapeHtml(model["wx_openid"]!)}</span>
+										<span >
+										<% if(model["wx_sex"]=='0'){%>
+									未知
+									<% }else if(model["wx_sex"]=='1'){%>
+									男性
+									<%} else if(model["wx_sex"]=='2'){%>
+									女性
+									<%}%>
+										</span>
+									</td>
+									<td class="hidden-phone">
+										<span >${escapeHtml(model["wx_cell_phone"]!)}</span>
 									</td>
 									<td class="hidden-phone">
 										<span >
@@ -104,10 +119,20 @@
 									<%} %>
 										</span>
 									</td>
-									<td class="hidden-phone">
-										<span >${escapeHtml(model["obj_id"]!)}</span>
-									</td>
 									<td class="hidden-phone">${model.subs_time!, dateFormat="yyyy-MM-dd HH:mm:ss"}</td>
+									<td class="hidden-phone">
+									<% if(model["obj_type"]==0){%>
+									<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/fapai/fphouse/view/${model.obj_id!}');"> 
+												${escapeHtml(model["obj_id"]!)}
+											</button> 
+									<% }else if(model["obj_type"]==1){%>
+									<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/fapai/fpcar/view/${model.obj_id!}');"> 
+												${escapeHtml(model["obj_id"]!)}
+											</button> 
+									<%} %>
+									
+									</td>
+								
 									<!-- <td class="hidden-phone">
 										
 											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/fapai/userConsult/view/${xxx.ids!}');">

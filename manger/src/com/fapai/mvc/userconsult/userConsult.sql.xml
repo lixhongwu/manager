@@ -3,7 +3,7 @@
 <sql-statement namespace="fapai.userConsult">
 		<sql id="splitPageSelect">
 		<![CDATA[ 
-        	select uc.*,wx.nickname wx_nick, wx.openid wx_openid
+        	select uc.*,wx.nickname wx_nick, wx.openid wx_openid,wx.sex wx_sex,wx.cell_phone wx_cell_phone
     	]]>
 	</sql>
 	<!-- 分页查询：from -->

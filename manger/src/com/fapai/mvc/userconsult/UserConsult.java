@@ -54,6 +54,8 @@ public class UserConsult extends BaseModel<UserConsult> {
 	public static final String column_subs_time = "subs_time";
 	public static final String column_wx_nick = "wx_nick";
 	public static final String column_wx_openid = "wx_openid";
+	public static final String column_wx_sex = "wx_sex";
+	public static final String column_wx_cell_phone = "wx_cell_phone";
 	/**
 	 * sqlId : fapai.userConsult.splitPageFrom
 	 * 描述：分页from
@@ -66,6 +68,14 @@ public class UserConsult extends BaseModel<UserConsult> {
 	private Timestamp subs_time;
 	private String wx_nick;
 	private String wx_openid;
+	private String wx_sex;
+	private String wx_cell_phone;
+	public Long getWx_sex() {
+		return get(column_wx_sex);
+	}
+	public Long getWx_cell_phone() {
+		return get(column_wx_cell_phone);
+	}
 	public Long getWx_nick() {
 		return get(column_wx_nick);
 	}

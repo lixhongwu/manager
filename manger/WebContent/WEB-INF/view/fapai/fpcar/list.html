@@ -1,5 +1,5 @@
 
-<form id="splitPage" action="/fapai/fpcar" method="POST" class="form-horizontal">
+<form id="splitPage" action="${cxt!}/fapai/fpcar" method="POST" class="form-horizontal">
 
 	<!-- BEGIN PAGE CONTAINER-->
 	<div class="container-fluid">
@@ -67,10 +67,10 @@
 							
 							
 							
-							<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/fapai/fpcar/delete" onclick="common_modals.deleteList(this)">
+					<!-- 		<button type="button" class="btn btn-small btn-danger" data-table="dataTable" data-url="/fapai/fpcar/delete" onclick="common_modals.deleteList(this)">
 								<i class="icon-remove icon-white"></i>
 								删除
-							</button> 
+							</button>  -->
 							
 						</span>
 
@@ -109,8 +109,11 @@
 									<th class="hidden-phone">
 										颜色
 									</th>
-									<th class="hidden-phone">
+									<!-- <th class="hidden-phone">
 										税费
+									</th> -->
+									<th class="hidden-phone">
+										状态
 									</th>
 									<th class="hidden-phone">${i18nMap["admin.common.operation"]}</th>
 								</tr>
@@ -129,7 +132,7 @@
 									</td>
 									<td class="hidden-phone">
 										<span >
-										<% if(mode["car_nature"]==0){%>
+										<% if(mode["car_nature"]==3){%>
 									其他
 									<% }else if(mode["car_nature"]==1){%>
 									非运营
@@ -156,17 +159,34 @@
 									<td class="hidden-phone">
 										<span >${escapeHtml(mode["color"]!)}</span>
 									</td>
-									<td class="hidden-phone">
+									<!-- <td class="hidden-phone">
 										<span >${escapeHtml(mode["tax"]!)}</span>
+									</td> -->
+									<td class="hidden-phone">
+									<% if(mode["shelves_status"]==0){%>
+									<span >上架</span>
+									<% }else if(mode["shelves_status"]==1){%>
+									<span >下架</span>
+									<%} %>
+										
 									</td>
 									<td class="hidden-phone">
-										
+									<% if(mode["shelves_status"]==0){%>
+									<button type="button" class="btn btn-small btn-danger"" onclick="shelves('${mode.ids!}',1);">
+												<i class="icon-remove"></i> 
+												下架
+											</button> 
+									<% }else if(mode["shelves_status"]==1){%>
+									<button type="button" class="btn btn-small btn-success" onclick="shelves('${mode.ids!}',0);">
+												<i class="icon-ok icon-white"></i> 
+												上架
+											</button> 
+									<%} %>
+											
 											<button type="button" class="btn btn-small" onclick="common_ajax.ajaxMainPanel('/fapai/fpcar/view/${mode.ids!}');">
 												<i class="icon-eye-open"></i> 
 												${i18nMap["admin.common.see"]}
 											</button> 
-										
-										
 										
 											<button type="button" class="btn btn-small btn-inverse" onclick="common_ajax.ajaxMainPanel('/fapai/fpcar/edit/${escapeHtml(mode.ids!)}');">
 												<i class="icon-refresh icon-white"></i>
@@ -204,7 +224,18 @@
 
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-
+		
+		
 	});
+	function shelves(ids,type){
+		var param = {"ids" : ids, "type" : type};
+		var result = common_ajax.ajaxFunc("/fapai/fpcar/shelves", param);
+		if(result){
+			common_modals.alert("更新成功!");
+			common_ajax.ajaxFormMainPanel("splitPage");
+		}else{
+			common_modals.alert("更新失败！");
+		}
+	}
 </script>
 

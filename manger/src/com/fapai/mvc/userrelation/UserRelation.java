@@ -79,6 +79,8 @@ dialog_input - 用户在公众号对话框输入
 	public static final String column_change_time = "change_time";
 	public static final String column_joiner_wxnick = "joiner_wxnick";
 	public static final String column_spreader_wxnick = "spreader_wxnick";
+	public static final String column_spreader_cell_phone = "spreader_cell_phone";
+	
 	
 	/**
 	 * sqlId : fapai.userRelation.splitPageFrom
@@ -99,6 +101,10 @@ dialog_input - 用户在公众号对话框输入
 	private Timestamp change_time;
 	private String joiner_wxnick;
 	private String  spreader_wxnick;
+	private String  spreader_cell_phone;
+	public String getSpreader_cell_phone() {
+		return get(column_spreader_cell_phone);
+	}
 	public String getSpreader_wxnick() {
 		return get(column_spreader_wxnick);
 	}

@@ -4,6 +4,8 @@ import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
+import com.platform.mvc.upload.UploadController;
+import com.platform.tools.ToolWeb;
 import com.jfinal.log.Log;
 
 import java.io.File;
@@ -65,7 +67,11 @@ public class FpcarController extends BaseController {
 		// Fpcar.dao.find(sql)
 		setAttr("fpcar", fpcar);
 		setAttr("fileList", picList);
-
+		if("path".equals(UploadController.pathType)) {
+			setAttr("piccontext", UploadController.PICCONTEXT);
+		}else {
+			setAttr("piccontext", ToolWeb.getContextPath(getRequest()));
+		}
 		render("/fapai/fpcar/update.html");
 	}
 	
@@ -96,6 +102,11 @@ public class FpcarController extends BaseController {
 		// Fpcar.dao.find(sql)
 		setAttr("fpcar", fpcar);
 		setAttr("fileList", picList);
+		if("path".equals(UploadController.pathType)) {
+			setAttr("piccontext", UploadController.PICCONTEXT);
+		}else {
+			setAttr("piccontext", ToolWeb.getContextPath(getRequest()));
+		}
 		render("/fapai/fpcar/view.html");
 	}
 	
@@ -103,8 +114,20 @@ public class FpcarController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
-		fpcarService.baseDelete(Fpcar.table_name, getPara() == null ? ids : getPara());
+		//fpcarService.baseDelete(Fpcar.table_name, getPara() == null ? ids : getPara());
+		Fpcar fpcar = Fpcar.dao.findById(getPara() == null ? ids : getPara());
+		fpcar.setIs_delete(1);
+		fpcar.update();
 		forwardAction("/fapai/fpcar/backOff");
+	}
+	/**
+	 * 上下架
+	 */
+	public void shelves(){
+		String ids = getPara("ids");
+		String type = getPara("type");
+		boolean bool = fpcarService.shelves(ids, type);
+		renderText(String.valueOf(bool));
 	}
 	
 }

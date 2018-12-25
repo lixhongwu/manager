@@ -4,7 +4,7 @@
 	<!-- 分页公共select -->
 	<sql id="splitPageSelect">
 		<![CDATA[ 
-        	select ur.*,wx.nickname joiner_wxnick, wx1.nickname spreader_wxnick
+        	select ur.*,wx.nickname joiner_wxnick, wx1.nickname spreader_wxnick,wx1.cell_phone spreader_cell_phone
     	]]>
 	</sql>
 	<!-- 分页查询：from -->

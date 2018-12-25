@@ -199,8 +199,20 @@ jQuery(function() {
         $( '#'+file.id ).addClass('upload-state-done');
         //$( '#'+file.id ).attr('ids', response[0].ids);
         var $input = $('#'+file.id ).find('input[class="fileids"]');
-        $input.val(response[0].ids);
-        $( '#isupdateImge').val("true");
+        var $li = $( '#'+file.id ),
+        $error = $li.find('div.error');
+        if(!response[0]){
+        	// 避免重复创建
+            if ( !$error.length ) {
+                $error = $('<div class="error"></div>').appendTo( $li );
+            }
+
+            $error.text('上传失败');
+        }else{
+        	 $input.val(response[0].ids);
+             $( '#isupdateImge').val("true");
+        }
+       
     });
 
     // 文件上传失败，现实上传出错。

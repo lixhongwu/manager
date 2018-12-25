@@ -11,6 +11,7 @@ import com.jfinal.log.Log;
 import java.io.File;
 import java.util.List;
 
+import com.fapai.mvc.fpcar.Fpcar;
 import com.fapai.mvc.picuphouse.PicUpHouse;
 import com.jfinal.aop.Before;
 
@@ -110,12 +111,22 @@ public class FphouseController extends BaseController {
 		render("/fapai/fphouse/view.html");
 	}
 	
-	/**
-	 * 删除
-	 */
+
 	public void delete() {
-		fphouseService.baseDelete(Fphouse.table_name, getPara() == null ? ids : getPara());
+		//fpcarService.baseDelete(Fpcar.table_name, getPara() == null ? ids : getPara());
+		Fphouse fphouse = Fphouse.dao.findById(getPara() == null ? ids : getPara());
+		fphouse.setIs_delete(1);
+		fphouse.update();
 		forwardAction("/fapai/fphouse/backOff");
+	}
+	/**
+	 * 上下架
+	 */
+	public void shelves(){
+		String ids = getPara("ids");
+		String type = getPara("type");
+		boolean bool = fphouseService.shelves(ids, type);
+		renderText(String.valueOf(bool));
 	}
 	
 }

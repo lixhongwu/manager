@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fapai.mvc.fpcar.Fpcar;
 import com.fapai.mvc.picuphouse.PicUpHouse;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
@@ -29,16 +30,19 @@ public class FphouseService extends BaseService {
 		for (int i = 0; i < fileids.length; i++) {
 			String fileid=fileids[i];
 			Upload upload = Upload.dao.findById(fileid);
-			PicUpHouse pic=new PicUpHouse();
-			pic.set("id_house", fphouse.getIds());
-			pic.set("pic_type", 0);
-			pic.set("pic_order", fileindex[i]);
-			pic.set("pic_url", UploadController.path_root+File.separator+upload.get("filename"));
-			pic.set("is_delete", 0);
-			pic.setFileid(fileid);
-			Date date=new Date();
-			pic.setModify_time(new Timestamp(date.getTime()));
-			pic.saveRandomId();
+			if(upload!=null){
+				PicUpHouse pic=new PicUpHouse();
+				pic.set("id_house", fphouse.getIds());
+				pic.set("pic_type", 0);
+				pic.set("pic_order", fileindex[i]);
+				pic.set("pic_url", UploadController.path_root+File.separator+upload.get("filename"));
+				pic.set("is_delete", 0);
+				pic.setFileid(fileid);
+				Date date=new Date();
+				pic.setModify_time(new Timestamp(date.getTime()));
+				pic.saveRandomId();
+			}
+			
 		}
 		
 	}
@@ -57,6 +61,21 @@ public class FphouseService extends BaseService {
 //		for (PicUpHouse picUpHouse : list) {
 //			picUpHouse.delete();
 //		}
+	}
+
+	public boolean shelves(String ids, String type) {
+		// TODO Auto-generated method stub
+		Fphouse fphouse = Fphouse.dao.findById(ids);
+		if(fphouse!=null) {
+			if("0".equals(type)) {
+				fphouse.setShelves_status(0);
+			}else if("1".equals(type)){
+				fphouse.setShelves_status(1);
+			}
+			return fphouse.update();
+		}else {
+			return false;
+		}
 	}
 	
 }

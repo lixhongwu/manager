@@ -1,5 +1,5 @@
 
-<form id="splitPage" action="/fapai/userRelation" method="POST" class="form-horizontal">
+<form id="splitPage" action="${cxt!}/fapai/userRelation" method="POST" class="form-horizontal">
 
 	<!-- BEGIN PAGE CONTAINER-->
 	<div class="container-fluid">
@@ -72,10 +72,13 @@
 										用户昵称
 									</th>
 									<th class="hidden-phone" >
+										推荐用户昵称	
+									</th>
+									<th class="hidden-phone" >
 										推荐用户openid	
 									</th>
 									<th class="hidden-phone" >
-										推荐用户昵称	
+										推荐用户手机号	
 									</th>
 									<th class="hidden-phone" >
 										推荐方式
@@ -98,11 +101,15 @@
 									<td class="hidden-phone">
 										<span >${escapeHtml(model["joiner_wxnick"]!)}</span>
 									</td>
+									
+									<td class="hidden-phone">
+										<span >${escapeHtml(model["spreader_wxnick"]!)}</span>
+									</td>
 									<td class="hidden-phone">
 										<span >${escapeHtml(model["spreader_openid"]!)}</span>
 									</td>
 									<td class="hidden-phone">
-										<span >${escapeHtml(model["spreader_wxnick"]!)}</span>
+										<span >${escapeHtml(model["spreader_cell_phone"]!)}</span>
 									</td>
 									<td class="hidden-phone">
 									<% if(model["change_method"]=="subscribe"){%>

@@ -149,8 +149,18 @@ public class Fphouse extends BaseModel<Fphouse> {
 	 * 字段类型：tinyint(4)  长度：null
 	 */
 	public static final String column_is_delete = "is_delete";
-	
-	
+	/**
+	 * 字段描述：商品上下架状态
+0 -- put on sale/ shelves.上架;
+1 -- pull off shelves 下架 
+	 * 字段类型：int(11)  长度：null
+	 */
+	public static final String column_shelves_status = "shelves_status";
+	/**
+	 * 字段描述： 
+	 * 字段类型：datetime  长度：null
+	 */
+	public static final String column_modify_time = "modify_time";
 	/**
 	 * sqlId : fapai.fphouse.splitPageFrom
 	 * 描述：分页from
@@ -178,6 +188,8 @@ public class Fphouse extends BaseModel<Fphouse> {
 	private String court_announce_link;
 	private String auction_state;
 	private Integer is_delete;
+	private Integer shelves_status;
+	private Timestamp modify_time;
 	
 	public void setHouse_title(String house_title){
 		set(column_house_title, house_title);
@@ -304,6 +316,18 @@ public class Fphouse extends BaseModel<Fphouse> {
 	}
 	public Integer getIs_delete() {
 		return get(column_is_delete);
+	}
+	public void setShelves_status(Integer shelves_status){
+		set(column_shelves_status, shelves_status);
+	}
+	public Integer getShelves_status() {
+		return get(column_shelves_status);
+	}
+	public void setModify_time(Timestamp modify_time){
+		set(column_modify_time, modify_time);
+	}
+	public Timestamp getModify_time() {
+		return get(column_modify_time);
 	}
 	
 }
